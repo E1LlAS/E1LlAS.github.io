@@ -1,0 +1,549 @@
+/* --- ГЛОБАЛЬНЫЕ ЦВЕТОВЫЕ ПЕРЕМЕННЫЕ ПО УМОЛЧАНИЮ (СЕРАЯ ТЕМА) --- */
+:root {
+    --bg-color: #1B1B1B; /* Основной фон (body) */
+    --sheet-bg: #282828; /* Фон Bottom Sheet, кнопки, меню */
+    --item-bg: #282828; /* Фон app-item, search-input, filter-button */
+    --text-color: white;
+    --secondary-text-color: #b4b4b4;
+    --search-focus-bg: #3a3a3a;
+    --green-accent: #00FF88;
+    --secondary-bg-color: white; /* Для <p> в app-info */
+    --secondary-text-color-p: #282828; /* Для текста в <p> в app-info */
+    --content-max-width: 900px; /* Максимальная ширина контента */
+    --content-padding: 1rem; /* Боковой отступ контента */
+}
+
+/* --- СВЕТЛАЯ ТЕМА (.theme-white) --- */
+.theme-white {
+    --bg-color: #F3F4F6;
+    --sheet-bg: #bbbbbb;
+    --item-bg: #d1d1d1;
+    --text-color: #282828;
+    --secondary-text-color: #424242;
+    --search-focus-bg: #c0c0c0;
+    --secondary-bg-color: #ffffff;
+    --secondary-text-color-p: #282828;
+}
+
+/* --- ЧЕРНАЯ ТЕМА (.theme-black) --- */
+.theme-black {
+    --bg-color: #000000;
+    --sheet-bg: #1A1A1A;
+    --item-bg: #1A1A1A;
+    --text-color: white;
+    --secondary-text-color: #888888;
+    --search-focus-bg: #333333;
+    --secondary-bg-color: white;
+    --secondary-text-color-p: #1B1B1B;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-color); /* Используем переменную */
+    min-height: 100vh;
+    transition: background 0.3s ease;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 170px;
+    background: var(--bg-color); /* Используем переменную */
+    z-index: 10;
+    padding-top: 2rem; /* Верхний отступ */
+}
+
+.container {
+    max-width: var(--content-max-width);
+    margin: 180px auto 3rem auto; 
+    padding: 0 var(--content-padding);
+    z-index: 10;
+}
+
+.sticky-header .container-inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+}
+
+.container.blur-active {
+    filter: blur(5px); /* Эффект рассеивания */
+    transition: filter 0.3s ease;
+    pointer-events: none; /* Блокируем взаимодействие с фоном */
+}
+
+.container.blur-active,
+.sticky-header.blur-active { 
+    transform: translateZ(0); 
+    will-change: filter, transform; 
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+    pointer-events: none;
+}
+
+.container a {
+    font-family: "Special Gothic Expanded One", sans-serif;
+    color: #888;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+}
+
+.search-bar {
+    position: relative;
+    margin-bottom: 1.5rem; /* Отступ между поиском и фильтрами */
+    display: flex;
+    align-items: center;
+}
+
+#searchInput {
+    width: 100%;
+    height: 50px;
+    padding: 12px 40px 12px 18px;
+    border: none;
+    border-radius: 32px;
+    background: var(--item-bg); /* Используем переменную */
+    color: var(--text-color); /* Используем переменную */
+    font-family: "Unbounded", sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: background 0.2s;
+}
+
+#searchInput:focus {
+    background: var(--search-focus-bg); /* Используем переменную */
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.filter-bar {
+    display: flex;
+    overflow-x: auto; 
+    gap: 12px; /* Увеличенный gap */
+    padding-bottom: 15px; 
+    margin-bottom: 1rem;
+    -webkit-overflow-scrolling: touch; 
+    cursor: grab; 
+}
+
+.filter-bar.dragging {
+    cursor: grabbing;
+}
+
+.filter-button {
+    font-family: "Unbounded", sans-serif;
+    font-weight: 500;
+    background: var(--item-bg); /* Используем переменную */
+    color: var(--text-color); /* Используем переменную */
+    border: 2px solid transparent;
+    padding: 10px 32px; /* Увеличенный padding для больших кнопок */
+    border-radius: 25px; /* Слегка увеличен радиус */
+    white-space: nowrap; 
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem; /* Увеличенный размер шрифта */
+}
+
+.filter-button:hover {
+    background: var(--search-focus-bg); /* Используем переменную */
+}
+
+.filter-button.active {
+    background: var(--item-bg);
+    color: var(--text-color);
+    border: 2px solid var(--green-accent);
+    font-weight: 800;
+}
+
+
+.apps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Уменьшено с 1rem до 0.6rem */
+}
+
+.app-item {
+    background: var(--item-bg); /* Используем переменную */
+    font-family: "Special Gothic Expanded One", sans-serif;
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Измененный transition */
+    height: 100%;
+    width: 100%;
+    box-shadow: none; /* Убран box-shadow */
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 1.5px;
+}
+
+.app-item:active {
+    /* Убрано transform: scale(0.98); */
+    border-color: rgba(255, 255, 255, 0.2); /* Легкая обводка при нажатии */
+}
+
+.app-item.selected {
+    border: 2px solid var(--green-accent); /* Обводка только зеленым цветом */
+    box-shadow: none; /* Убраны box-shadow */
+    position: relative;
+    z-index: 1;
+}
+
+/* Добавляем класс для скрытия элемента */
+.app-item.hidden {
+    display: none;
+}
+
+.floating-menu-trigger {
+    position: fixed;
+    bottom: 15px; /* Отступ снизу 15px */
+    left: 15px;  /* Отступ слева 15px (по умолчанию) */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--item-bg); /* Используем переменную */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 100; /* Выше всего */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.floating-menu-trigger:hover {
+    transform: scale(1.05);
+}
+
+.popup-menu {
+    position: fixed;
+    bottom: 80px;
+    left: 15px; /* Отступ слева 15px (по умолчанию) */
+    width: 160px;
+    background: var(--item-bg); /* Используем переменную */
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 99; /* Ниже триггера */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.color-palette {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-palette-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.color-palette-item:hover {
+    transform: scale(1.05);
+}
+
+.white-color {
+    background-color: #ffffff; /* Белый */
+}
+
+.grey-color {
+    background-color: #4B5563; /* Визуально отличаем серый в палитре */
+}
+
+.black-color {
+    background-color: #000000; /* Черный */
+}
+
+.color-palette-item.active {
+    border: 2px solid var(--green-accent); /* Обводка #00FF88 2px для активного */
+    transform: scale(1.1); 
+}
+
+.app-icon {
+    font-size: 2.5rem;
+    width: 80px;
+    height: 80px;
+}
+
+.app-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.app-info {
+    flex: 1;
+}
+
+.app-info h3 {
+    font-size: 1.3rem;
+    color: var(--text-color); /* Используем переменную */
+}
+
+.app-info p {
+    color: var(--secondary-text-color-p); /* Используем переменную */
+    font-size: 0.9rem;
+    background: var(--secondary-bg-color); /* Используем переменную */
+    border-radius: 32px;
+    margin-top: 5px;
+    padding: 10px 25px;
+    font-family: "Unbounded", sans-serif;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-style: normal;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 999;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+    background: var(--sheet-bg); /* Используем переменную */
+    border-radius: 40px 40px 0 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.bottom-sheet.active {
+    transform: translateY(0);
+}
+
+.bottom-sheet::-webkit-scrollbar{
+    display: none;
+}
+
+.bottom-sheet-content {
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sheet-handle {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 5px;
+    background: rgba(255, 255, 255);
+    border-radius: 3px;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.sheet-handle:active {
+    cursor: grabbing;
+}
+
+.app-banner {
+    margin: 20px;      
+    margin-top: 25px;
+    width: calc(100% - 40px);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.app-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.banner-icon {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    font-size: 4.8rem;
+    color: white;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+}
+
+.app-banner::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.65) 100%);
+    border-radius: 20px;
+    pointer-events: none;
+}
+
+.app-name {
+    color: var(--text-color); /* Используем переменную */
+    margin-bottom: 1rem;
+    text-align: left;
+    padding: 0 20px;
+    width: 100%;
+    align-self: flex-start;
+    margin-left: 0;
+    font-size: 30px;
+    font-family: "Special Gothic Expanded One", sans-serif;
+    letter-spacing: 1.8px;
+}
+
+.app-description {
+    color: var(--secondary-text-color); /* Используем переменную */
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 2rem;
+    margin-top: -10px;
+    align-self: flex-start;
+    padding: 0 20px;
+    font-size: 20px;
+}
+
+.timer-button {
+    margin: 0px auto 50px;
+    padding: 14px 32px;
+    font-family: "Unbounded", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--secondary-text-color-p); /* Используем переменную */
+    background: var(--secondary-bg-color); /* Используем переменную */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    min-width: 220px;
+}
+
+/* --- ПРАВИЛО ДЛЯ ШИРОКИХ ЭКРАНОВ (ФИКСАЦИЯ МЕНЮ) --- */
+/* Breakpoint 932px = 900px (max-width) + 2*1rem (padding) */
+@media (min-width: 932px) { 
+    .floating-menu-trigger,
+    .popup-menu {
+        /* Вычисляем позицию левого края: 
+           Половина экрана - (Половина макс. ширины контента) + Отступ контента.
+           Это привязывает элемент к левому краю контейнера .container. */
+        left: calc(50% - (var(--content-max-width) / 2) + var(--content-padding)); 
+    }
+}
+
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.0rem;
+    }
+    .app-info p {
+        color: var(--secondary-text-color-p);
+        font-size: 0.9rem;
+        background: var(--secondary-bg-color);
+        border-radius: 32px;
+        margin-top: 5px;
+        padding: 10px 25px;
+        font-family: "Unbounded", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        display: inline-block;
+        max-width: 100%;
+    }
+    
+    .app-item {
+        padding: 1rem;
+    }
+    
+    .app-icon {
+        font-size: 2.5rem;
+        width: 70px;
+        height: 70px;
+    }
+    
+    .bottom-sheet {
+        height: 70vh;
+    }
+    
+    .filter-bar {
+        padding: 0 1rem 15px 1rem; 
+        margin-left: -1rem;
+        margin-right: -1rem;
+    }
+}
