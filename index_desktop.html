@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitch App - Desktop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_desktop.css">
+</head>
+<body class="theme-grey">
+    <div class="desktop-container">
+        <main class="desktop-main-content">
+            <header class="desktop-header">
+                <div class="filter-bar" id="desktopFilterBar">
+                    <button class="filter-button" data-filter="live">Актуальный</button>
+                    <button class="filter-button" data-filter="soon">Скоро</button>
+                    <div class="desktop-search-wrapper" id="desktopSearchWrapper">
+                        <button class="desktop-search-trigger" id="desktopSearchTrigger">
+                            <img src="img/search.png" alt="Поиск" class="search-icon" id="desktopSearchIcon">
+                        </button>
+                        <input type="text" id="desktopSearchInput" placeholder="Поиск по значкам...">
+                    </div>
+                    <button class="filter-button" data-filter="all">Все значки</button>
+                </div>
+            </header>
+            
+            <div class="apps-list" id="desktopAppsList">
+                </div>
+        </main>
+
+        <div class="desktop-details-panel" id="desktopDetailsPanel">
+            <div class="details-content">
+                <div class="app-banner">
+                    <img src="img/baner/1.png" alt="Banner" id="desktopAppBannerImg">
+                </div>
+                <h2 class="app-name" id="desktopAppName">Название</h2>
+                <p class="app-description" id="desktopAppDescription">Описание приложения</p>
+                <button class="timer-button" id="desktopTimerButton">
+                    До начала 14:48:00
+                </button>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="desktop-theme-switch">
+        <button class="color-palette-item white-color" data-color="white" title="Светлая"></button>
+        <button class="color-palette-item grey-color active" data-color="grey" title="Серая"></button>
+        <button class="color-palette-item black-color" data-color="black" title="Темная"></button>
+    </div>
+
+    <script src="script_desktop.js"></script>
+</body>
+
+<script>
+    const DESKTOP_THRESHOLD = 900; 
+    const DESKTOP_FILE = 'index_desktop.html';
+
+    function checkAndRedirect() {
+        if (window.innerWidth >= DESKTOP_THRESHOLD) {
+            if (!window.location.pathname.endsWith(DESKTOP_FILE)) {
+                window.location.replace(DESKTOP_FILE);
+            }
+        }
+        else if (window.location.pathname.endsWith(DESKTOP_FILE)) {
+            window.location.replace('index.html');
+        }
+    }
+
+    checkAndRedirect(); 
+    window.addEventListener('resize', checkAndRedirect);
+</script>
+
+</html>

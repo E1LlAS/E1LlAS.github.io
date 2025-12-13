@@ -59,4 +59,23 @@
 
     <script src="script.js"></script>
 </body>
+
+<script>
+    const DESKTOP_THRESHOLD = 900; 
+    const DESKTOP_FILE = 'index_desktop.html';
+
+    function checkAndRedirect() {
+        if (window.innerWidth >= DESKTOP_THRESHOLD) {
+            if (!window.location.pathname.endsWith(DESKTOP_FILE)) {
+                window.location.replace(DESKTOP_FILE);
+            }
+        }
+        else if (window.location.pathname.endsWith(DESKTOP_FILE)) {
+            window.location.replace('index.html');
+        }
+    }
+    checkAndRedirect(); 
+    window.addEventListener('resize', checkAndRedirect);
+</script>
+
 </html>
