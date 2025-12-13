@@ -89,7 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeDetailsPanel() {
         if (detailsPanel.classList.contains('active')) {
-            appsList.classList.remove('panel-open'); 
+            
+            // Сдвигаем список обратно, только если поиск не активен
+            if (!searchWrapper.classList.contains('active')) { 
+                appsList.classList.remove('panel-open'); 
+            }
             
             detailsPanel.classList.remove('active');
             if (currentSelected) {
@@ -197,13 +201,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function closeSearch() {
-        if (searchWrapper.classList.contains('active') && searchInput.value.trim() === '') {
-            searchWrapper.classList.remove('active');
-            setTimeout(() => {
-                searchInput.value = '';
-                filterApps();
-            }, ANIMATION_DURATION);
-            return true;
+        if (searchWrapper.classList.contains('active')) {
+            if (searchInput.value.trim() === '') {
+                 searchWrapper.classList.remove('active');
+                 
+                 // Убираем сдвиг, только если панель деталей не активна
+                 if (!detailsPanel.classList.contains('active')) {
+                    appsList.classList.remove('panel-open'); 
+                 }
+                 
+                 setTimeout(() => {
+                     searchInput.value = '';
+                     filterApps();
+                 }, ANIMATION_DURATION);
+                 
+                 searchInput.blur();
+                 return true;
+            }
         }
         return false;
     }
@@ -212,15 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isActive = searchWrapper.classList.contains('active');
 
         if (isActive) {
-            searchWrapper.classList.remove('active');
-            
-            setTimeout(() => {
-                searchInput.value = '';
-                filterApps();
-            }, ANIMATION_DURATION); 
-            
-            searchInput.blur(); 
-            
+            searchInput.focus();
         } else {
             searchWrapper.classList.add('active');
             searchInput.focus();
@@ -241,23 +247,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     document.addEventListener('click', (event) => {
-        const isClickInsideSearch = searchWrapper.contains(event.target) || searchTrigger.contains(event.target);
+        const isClickOnSearchInput = event.target.id === 'desktopSearchInput'; 
+        
+        const isClickInsideSearchWrapper = searchWrapper.contains(event.target);
+        const isClickInsideSearchTrigger = searchTrigger.contains(event.target);
         const isClickInsideDetails = detailsPanel.contains(event.target);
-        const isClickInsideFilterBar = document.getElementById('desktopFilterBar').contains(event.target);
         const isClickInsideThemeSwitch = document.querySelector('.desktop-theme-switch').contains(event.target); 
         
         const clickedAppItem = event.target.closest('.app-item');
-        const isClickInsideControl = isClickInsideSearch || isClickInsideFilterBar || isClickInsideThemeSwitch;
+        const clickedFilterButton = event.target.closest('.filter-button');
+        const isClickInsideNonClosingControl = isClickInsideThemeSwitch || isClickInsideSearchTrigger;
         
-        if (detailsPanel.classList.contains('active') && !isClickInsideDetails && !clickedAppItem && !isClickInsideControl) {
+        const shouldCloseDetailsPanel = (
+            detailsPanel.classList.contains('active') && 
+            !isClickInsideDetails && 
+            !clickedAppItem && 
+            !clickedFilterButton &&
+            !isClickInsideNonClosingControl &&
+            !(searchWrapper.classList.contains('active') && isClickInsideSearchWrapper)
+        );
+        
+        if (shouldCloseDetailsPanel) { 
             closeDetailsPanel();
         }
         
-        if (searchWrapper.classList.contains('active') && !isClickInsideSearch) {
-            if (searchInput.value.trim() === '') {
-                 closeSearch();
-                 return;
-            }
+        if (searchWrapper.classList.contains('active') && !isClickInsideSearchWrapper && !isClickInsideSearchTrigger) {
+             closeSearch();
         }
     });
 

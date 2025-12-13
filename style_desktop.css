@@ -14,11 +14,11 @@
     --unavailable-text-color: #1B1B1B;
 
     --desktop-padding: 1.5rem;
-    --desktop-details-width: 500px;
-    --apps-list-shift: calc(var(--desktop-details-width) + 35px + 35px);
+    --desktop-details-width: 400px;
+   --apps-list-shift: calc(var(--desktop-details-width) + 25px);
 }
 .theme-white {
-    --bg-color: #F3F4F6;
+    --bg-color: #ffffff;
     --main-content-bg: #ffffff;
     --details-bg: #d1d1d1;
     --sidebar-bg: #ffffff;
@@ -59,6 +59,7 @@ body {
     color: var(--text-color);
     min-height: 100vh;
     overflow: hidden; 
+    
 }
 
 .desktop-container {
@@ -70,7 +71,7 @@ body {
 .desktop-main-content {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 0 var(--desktop-padding) 2rem; 
+    padding: 0 var(--desktop-padding) 15px;
 }
 
 .desktop-header {
@@ -88,7 +89,8 @@ body {
 }
 
 .desktop-header h1 {
-    font-family: "Special Gothic Expanded One", sans-serif;
+    font-family: "Unbounded", sans-serif;
+    font-weight: 800;
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
@@ -121,7 +123,6 @@ body {
 }
 
 .filter-button[data-filter="all"] {
-    margin-right: 15px;
     flex-shrink: 0;
     z-index: 10;
 }
@@ -165,10 +166,12 @@ body {
     font-size: 0.9rem;
     outline: none;
     opacity: 0;
+    pointer-events: none;
 }
 
 .desktop-search-wrapper.active #desktopSearchInput {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .desktop-search-trigger {
@@ -191,7 +194,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 1rem;
-    transition: padding-right 0.5s ease; 
+    transition: padding-right 0.5s ease;
 }
 
 .apps-list.panel-open {
@@ -200,7 +203,7 @@ body {
 
 .app-item {
     background: var(--item-bg);
-    font-family: "Special Gothic Expanded One", sans-serif;
+    font-family: "Unbounded", sans-serif;
     padding: 1rem;
     border-radius: 12px;
     display: flex;
@@ -242,26 +245,26 @@ body {
     background: var(--secondary-bg-color);
     color: var(--secondary-text-color-p);
     border-radius: 32px;
-    padding: 8px 20px;
+    padding: 10px 20px; 
     font-size: 0.9rem;
     display: inline-block;
 }
 
 .desktop-details-panel {
     position: fixed;
-    right: 35px; 
-    bottom: 15px; 
+    right: 25px; 
+    bottom: 10px;
     top: calc(var(--desktop-padding) + 80px); 
     width: var(--desktop-details-width); 
-    height: calc(100vh - 110px - var(--desktop-padding)); 
+    height: calc(100vh - 95px - var(--desktop-padding));
     background: var(--item-bg);
     flex-shrink: 0;
     padding: var(--desktop-padding);
     overflow-y: auto;
     border-radius: 30px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    transform: translateX(calc(var(--desktop-details-width) + 35px)); 
+    transform: translateX(calc(var(--desktop-details-width) + 55px)); 
     transition: transform 0.5s ease;
+    justify-content: space-between;
 }
 
 .desktop-details-panel.active {
@@ -269,6 +272,7 @@ body {
 }
 
 .desktop-details-panel .details-content {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -288,7 +292,7 @@ body {
 }
 
 .desktop-details-panel .app-name {
-    font-family: "Special Gothic Expanded One", sans-serif;
+    font-family: "Unbounded", sans-serif;
     font-size: 2rem;
     margin: 10px 0;
     text-align: center;
@@ -313,8 +317,9 @@ body {
     border-radius: 50px;
     cursor: pointer;
     display: block;
-    min-width: 200px;
-    margin-bottom: 1rem;
+    min-width: 270px;
+    margin-bottom: 5px;
+    margin-top: auto;
 }
 
 .timer-button.unavailable {
@@ -361,4 +366,22 @@ body {
 .color-palette-item.active {
     border: 2px solid var(--green-accent);
     transform: scale(1.2);
+}
+
+
+.desktop-main-content::-webkit-scrollbar,
+.desktop-details-panel::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.desktop-main-content,
+.desktop-details-panel {
+    scrollbar-width: none;  
+}
+
+.desktop-main-content,
+.desktop-details-panel {
+    -ms-overflow-style: none; 
 }
