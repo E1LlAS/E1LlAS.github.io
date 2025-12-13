@@ -238,22 +238,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.addEventListener('click', (event) => {
         const isClickInsideSearch = searchWrapper.contains(event.target) || searchTrigger.contains(event.target);
-        const isClickInsideAppList = appsList.contains(event.target);
+        const isClickInsideDetails = detailsPanel.contains(event.target);
+        const isClickInsideFilterBar = document.getElementById('desktopFilterBar').contains(event.target);
+        const isClickInsideThemeSwitch = document.querySelector('.desktop-theme-switch').contains(event.target); // Проверка на переключатели тем
         
-        if (!isClickInsideSearch && !isClickInsideDetails) {
+        const clickedAppItem = event.target.closest('.app-item');
+        const isClickInsideControl = isClickInsideSearch || isClickInsideFilterBar || isClickInsideThemeSwitch;
+
+        if (detailsPanel.classList.contains('active') && !isClickInsideDetails && !clickedAppItem && !isClickInsideControl) {
+            closeDetailsPanel();
+        }
+        
+        if (!isClickInsideSearch) {
             
-            if (closeDetailsPanel()) {
-                return;
-            }
-        
             if (searchWrapper.classList.contains('active') && searchInput.value.trim() === '') {
                  closeSearch();
                  return;
-            }
-            
-            if (!searchWrapper.classList.contains('active') && !isClickInsideAppList) {
-                searchWrapper.classList.add('active');
-                searchInput.focus();
             }
         }
     });
