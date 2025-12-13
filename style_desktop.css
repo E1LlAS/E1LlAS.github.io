@@ -74,19 +74,15 @@ body {
 }
 
 .desktop-header {
-    margin-bottom: 2rem;
+    margin-bottom: 12px;
     position: sticky;
-    top: 0;
-    
+    top: 0; 
     background: var(--main-content-bg);
-    
     margin-left: calc(-1 * var(--desktop-padding));
     margin-right: calc(-1 * var(--desktop-padding));
     padding-left: var(--desktop-padding);
     padding-right: var(--desktop-padding);
-    
     padding-top: 25px; 
-    
     padding-bottom: 1rem;
     z-index: 5;
 }
@@ -188,7 +184,7 @@ body {
 .apps-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-    gap: 1.5rem;
+    gap: 1rem;
     transition: padding-right 0.5s ease; 
 }
 
@@ -250,7 +246,7 @@ body {
     position: fixed;
     right: 35px; 
     bottom: 15px; 
-    top: calc(var(--desktop-padding) + 90px); 
+    top: calc(var(--desktop-padding) + 80px); 
     width: var(--desktop-details-width); 
     height: calc(100vh - 110px - var(--desktop-padding)); 
     background: var(--item-bg);
@@ -289,7 +285,7 @@ body {
 .desktop-details-panel .app-name {
     font-family: "Special Gothic Expanded One", sans-serif;
     font-size: 2rem;
-    margin: 1rem 0;
+    margin: 10px 0;
     text-align: center;
 }
 
