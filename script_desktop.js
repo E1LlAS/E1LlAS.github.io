@@ -1,3 +1,5 @@
+// script_desktop.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const originalApps = [
         { id: 1, name: 'Twitch Recap 2025', time: '09.12', description: 'Этот значок был присуждён 2 декабря 2025 года самым активным пользователям Twitch', banner: '1.png', iconFile: '1.png', status: 'soon' },
@@ -205,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return false;
     }
-
+    
     function handleSearchToggle() {
         const isActive = searchWrapper.classList.contains('active');
 
@@ -224,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchInput.focus();
         }
     }
+
     searchInput.addEventListener('blur', () => {
         setTimeout(() => {
              if (searchInput.value.trim() === '' && document.activeElement !== searchTrigger) {
@@ -231,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 100); 
     });
+
     searchTrigger.addEventListener('click', (event) => {
         event.preventDefault(); 
         handleSearchToggle();
@@ -240,18 +244,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const isClickInsideSearch = searchWrapper.contains(event.target) || searchTrigger.contains(event.target);
         const isClickInsideDetails = detailsPanel.contains(event.target);
         const isClickInsideFilterBar = document.getElementById('desktopFilterBar').contains(event.target);
-        const isClickInsideThemeSwitch = document.querySelector('.desktop-theme-switch').contains(event.target); // Проверка на переключатели тем
+        const isClickInsideThemeSwitch = document.querySelector('.desktop-theme-switch').contains(event.target); 
         
         const clickedAppItem = event.target.closest('.app-item');
         const isClickInsideControl = isClickInsideSearch || isClickInsideFilterBar || isClickInsideThemeSwitch;
-
+        
         if (detailsPanel.classList.contains('active') && !isClickInsideDetails && !clickedAppItem && !isClickInsideControl) {
             closeDetailsPanel();
         }
         
-        if (!isClickInsideSearch) {
-            
-            if (searchWrapper.classList.contains('active') && searchInput.value.trim() === '') {
+        if (searchWrapper.classList.contains('active') && !isClickInsideSearch) {
+            if (searchInput.value.trim() === '') {
                  closeSearch();
                  return;
             }

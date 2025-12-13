@@ -15,7 +15,7 @@
 }
 
 .theme-white {
-    --bg-color: #F3F4F6;
+    --bg-color: #ffffff;
     --sheet-bg: #bbbbbb;
     --item-bg: #d1d1d1;
     --text-color: #282828;
@@ -265,7 +265,7 @@ header h1 {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: var(--item-bg);
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;

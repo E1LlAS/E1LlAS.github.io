@@ -19,7 +19,7 @@
 }
 .theme-white {
     --bg-color: #F3F4F6;
-    --main-content-bg: #F3F4F6;
+    --main-content-bg: #ffffff;
     --details-bg: #d1d1d1;
     --sidebar-bg: #ffffff;
     --item-bg: #d1d1d1;
@@ -138,8 +138,14 @@ body {
     padding-right: 10px;
     border-radius: 25px;
     transition: width 0.2s ease, background 0.2s ease, flex-grow 0.2s ease; 
-    flex-shrink: 0; 
     flex-direction: row-reverse; 
+}
+
+.desktop-search-wrapper .search-icon {
+    pointer-events: none;
+    display: block;
+    width: 80px;
+    height: 80px;
 }
 
 .desktop-search-wrapper.active {
