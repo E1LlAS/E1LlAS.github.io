@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchTrigger = document.getElementById('desktopSearchTrigger');
     
     const body = document.body;
-    const STORAGE_KEY = 'twitchAppThemeDesktop';
+    const STORAGE_KEY = 'twitchAppTheme';
     const ANIMATION_DURATION = 300;
 
     let currentSelected = null;
