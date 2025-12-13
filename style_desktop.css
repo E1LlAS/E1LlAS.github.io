@@ -344,14 +344,21 @@ body {
 
 .desktop-theme-switch {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
+    bottom: 0px; /* Немного приподнимем */
+    left: 20px;  /* Отступ слева */
     display: flex;
-    gap: 10px;
+    flex-direction: column; /* Основное направление - колонка */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    gap: 0; /* Убираем промежуток между строками */
     background: transparent;
-    padding: 10px;
+    padding: 20px 10px;
     border-radius: 10px;
     z-index: 100;
+}
+
+.theme-row {
+    display: flex;
+    gap: 10px; /* Промежуток между шариками в ряду */
 }
 
 .color-palette-item {
@@ -365,7 +372,7 @@ body {
 }
 
 .white-color { background-color: #ffffff; }
-.grey-color { background-color: #4B5563; }
+.grey-color { background-color: #1B1B1B; }
 .black-color { background-color: #000000; }
 
 .color-palette-item:hover { transform: scale(1.1); }
