@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 7, name: 'Jeff the Land Shark', time: '06.10 - 11.12', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'live' },
         { id: 8, name: 'Jeff the Land Shark', time: '06.10 - 11.12', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'live' },
         { id: 9, name: 'Jeff the Land Shark', time: '06.10 - 11.12', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'live' },
+        { id: 10, name: 'Twitch Recap 2025', time: '09.12', description: 'Этот значок был присуждён 2 декабря 2025 года самым активным пользователям Twitch', banner: '1.png', iconFile: '1.png', status: 'soon' },    
+        { id: 11, name: 'Twitch Recap 2025', time: '09.12', description: 'Этот значок был присуждён 2 декабря 2025 года самым активным пользователям Twitch', banner: '1.png', iconFile: '1.png', status: 'soon' },    
+        { id: 12, name: 'Twitch Recap 2025', time: '09.12', description: 'Этот значок был присуждён 2 декабря 2025 года самым активным пользователям Twitch', banner: '1.png', iconFile: '1.png', status: 'soon' },    
     ];
     
     const apps = originalApps; 
