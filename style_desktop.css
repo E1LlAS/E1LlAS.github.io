@@ -12,6 +12,7 @@
     --secondary-text-color-p: #282828;
     --unavailable-bg-color: #949494;
     --unavailable-text-color: #1B1B1B;
+    --hover-border-color: #949494;
 
     --desktop-padding: 1.5rem;
     --desktop-details-width: 400px;
@@ -30,6 +31,7 @@
     --secondary-text-color-p: #282828;
     --unavailable-bg-color: #949494;
     --unavailable-text-color: #ffffff;
+    --hover-border-color: #1B1B1B;
 }
 
 .theme-black {
@@ -45,6 +47,7 @@
     --secondary-text-color-p: #1B1B1B;
     --unavailable-bg-color: #949494;
     --unavailable-text-color: #000000;
+    --hover-border-color: #949494;
 }
 
 * {
@@ -213,11 +216,11 @@ body {
     cursor: pointer;
     transition: border-color 0.2s ease; 
     border: 2px solid transparent;
-    letter-spacing: 2.5px;
+    letter-spacing: 0.5px;
 }
 
 .app-item:hover {
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--hover-border-color);
 }
 
 .app-item.selected {
@@ -248,6 +251,12 @@ body {
     padding: 10px 20px; 
     font-size: 0.9rem;
     display: inline-block;
+}
+
+.app-item[data-status="unavailable"] {
+    color: var(--unavailable-text-color);
+    opacity: 0.6; 
+    cursor: default;
 }
 
 .desktop-details-panel {
