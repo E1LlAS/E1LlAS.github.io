@@ -1,5 +1,3 @@
-// script_desktop.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const originalApps = [
         { id: 1, name: 'Twitch Recap 2025', time: '09.12', description: 'Этот значок был присуждён 2 декабря 2025 года самым активным пользователям Twitch', banner: '1.png', iconFile: '1.png', status: 'soon' },
@@ -90,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeDetailsPanel() {
         if (detailsPanel.classList.contains('active')) {
             
-            // Сдвигаем список обратно, только если поиск не активен
             if (!searchWrapper.classList.contains('active')) { 
                 appsList.classList.remove('panel-open'); 
             }
@@ -205,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (searchInput.value.trim() === '') {
                  searchWrapper.classList.remove('active');
                  
-                 // Убираем сдвиг, только если панель деталей не активна
                  if (!detailsPanel.classList.contains('active')) {
                     appsList.classList.remove('panel-open'); 
                  }
