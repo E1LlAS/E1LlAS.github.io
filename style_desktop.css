@@ -14,7 +14,8 @@
     --unavailable-text-color: #1B1B1B;
 
     --desktop-padding: 1.5rem;
-    --desktop-sidebar-width: 250px;
+    --desktop-details-width: 500px;
+    --apps-list-shift: calc(var(--desktop-details-width) + 35px + 35px);
 }
 .theme-white {
     --bg-color: #F3F4F6;
@@ -65,32 +66,27 @@ body {
     height: 100vh;
     width: 100vw;
 }
-.desktop-sidebar {
-    width: var(--desktop-sidebar-width);
-    background: var(--sidebar-bg);
-    padding: var(--desktop-padding);
-    flex-shrink: 0;
-    overflow-y: auto;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.desktop-sidebar h2 {
-    font-family: "Unbounded", sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-}
 
 .desktop-main-content {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 2rem var(--desktop-padding); 
+    padding: 0 var(--desktop-padding) 2rem; 
 }
 
 .desktop-header {
     margin-bottom: 2rem;
     position: sticky;
     top: 0;
+    
     background: var(--main-content-bg);
+    
+    margin-left: calc(-1 * var(--desktop-padding));
+    margin-right: calc(-1 * var(--desktop-padding));
+    padding-left: var(--desktop-padding);
+    padding-right: var(--desktop-padding);
+    
+    padding-top: 25px; 
+    
     padding-bottom: 1rem;
     z-index: 5;
 }
@@ -193,11 +189,11 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 1.5rem;
-    transition: padding-right 0.3s ease; 
+    transition: padding-right 0.5s ease; 
 }
 
 .apps-list.panel-open {
-    padding-right: 540px;
+    padding-right: var(--apps-list-shift);
 }
 
 .app-item {
@@ -211,7 +207,7 @@ body {
     text-align: center;
     gap: 1rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease; 
     border: 2px solid transparent;
     letter-spacing: 1.5px;
     height: 100%;
@@ -254,8 +250,8 @@ body {
     position: fixed;
     right: 35px; 
     bottom: 15px; 
-    top: calc(var(--desktop-padding) + 90px);
-    width: 500px;
+    top: calc(var(--desktop-padding) + 90px); 
+    width: var(--desktop-details-width); 
     height: calc(100vh - 110px - var(--desktop-padding)); 
     background: var(--item-bg);
     flex-shrink: 0;
@@ -263,28 +259,12 @@ body {
     overflow-y: auto;
     border-radius: 30px; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(calc(var(--desktop-details-width) + 35px)); 
+    transition: transform 0.5s ease;
 }
 
 .desktop-details-panel.active {
-    opacity: 1;
-    visibility: visible;
     transform: translateX(0);
-}
-
-.desktop-main-content.panel-open {
-    padding-right: 435px;
-    transition: padding-right 0.3s ease;
-}
-
-.desktop-details-panel:not(.active) .details-content {
-    visibility: hidden;
-}
-
-.desktop-details-panel.active .details-content {
-    visibility: visible;
 }
 
 .desktop-details-panel .details-content {
@@ -344,12 +324,12 @@ body {
 
 .desktop-theme-switch {
     position: fixed;
-    bottom: 0px; /* Немного приподнимем */
-    left: 20px;  /* Отступ слева */
+    bottom: 0px; 
+    left: 20px;  
     display: flex;
-    flex-direction: column; /* Основное направление - колонка */
-    align-items: center; /* Центрируем содержимое по горизонтали */
-    gap: 0; /* Убираем промежуток между строками */
+    flex-direction: column; 
+    align-items: center; 
+    gap: 0; 
     background: transparent;
     padding: 20px 10px;
     border-radius: 10px;
@@ -358,7 +338,7 @@ body {
 
 .theme-row {
     display: flex;
-    gap: 10px; /* Промежуток между шариками в ряду */
+    gap: 10px; 
 }
 
 .color-palette-item {

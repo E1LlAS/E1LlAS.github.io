@@ -1,12 +1,14 @@
-// script_desktop.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Исходные данные приложений 
     const originalApps = [
         { id: 1, name: 'Twitch Recap 2025', time: '09.12', description: 'Этот значок был присуждён 2 декабря 2025 года самым активным пользователям Twitch', banner: '1.png', iconFile: '1.png', status: 'soon' },
         { id: 2, name: 'Jeff the Land Shark', time: '06.10 - 11.12', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'live' },
         { id: 3, name: 'DragonScimmy', time: 'До начала 14:28:00', description: 'Актуальный пример.', banner: '2.png', iconFile: '2.png', status: 'soon' },
         { id: 4, name: 'Twitch Intern 2022', time: 'До начала 14:48:00', description: 'Скоро будет доступно.', banner: '2.png', iconFile: '2.png', status: 'soon' },
         { id: 5, name: 'TwitchCon 2023 - Paris', time: 'Недоступно', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'unavailable' },
+        { id: 6, name: 'Jeff the Land Shark', time: '06.10 - 11.12', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'live' },
+        { id: 7, name: 'Jeff the Land Shark', time: '06.10 - 11.12', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'live' },
+        { id: 8, name: 'Jeff the Land Shark', time: '06.10 - 11.12', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'live' },
+        { id: 9, name: 'Jeff the Land Shark', time: '06.10 - 11.12', description: 'Можно получить, оформив или подарив платную подписку стримеру в категории.', banner: '2.png', iconFile: '2.png', status: 'live' },
     ];
     
     const apps = originalApps; 
@@ -233,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); 
         handleSearchToggle();
     });
-    -
+    
     document.addEventListener('click', (event) => {
         const isClickInsideSearch = searchWrapper.contains(event.target) || searchTrigger.contains(event.target);
         const isClickInsideAppList = appsList.contains(event.target);
